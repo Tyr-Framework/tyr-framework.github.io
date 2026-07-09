@@ -151,6 +151,7 @@ h1, h2, h3, h4 {
   color: var(--text);
   font-size: 18px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* ---------- Buttons ---------- */
@@ -608,8 +609,38 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 680px) {
-  .nav__links, .nav__cta .btn--ghost span.only-desktop { display: none; }
+  .nav__cta .btn--ghost span.only-desktop { display: none; }
   .nav__toggle { display: flex; align-items: center; justify-content: center; }
+
+  .nav__links {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    background: rgba(10, 11, 15, 0.98);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6);
+    transition: max-height 0.28s ease, opacity 0.2s ease;
+  }
+  .nav__links.is-open {
+    max-height: 420px;
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav__links a {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 15.5px;
+  }
+
   .grid--3, .grid--4, .grid--2 { grid-template-columns: 1fr; }
   .section-pad { padding: 64px 0; }
   .hero { padding: 100px 0 64px; }

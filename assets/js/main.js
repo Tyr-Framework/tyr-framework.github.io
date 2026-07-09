@@ -1,21 +1,37 @@
 // Tyr Framework — site interactions
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- Mobile nav toggle ---------- */
+  /* ---------- Mobile nav dropdown ---------- */
   const toggle = document.querySelector('.nav__toggle');
   const links = document.querySelector('.nav__links');
   if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      links.style.display = open ? 'flex' : '';
+    const closeMenu = () => {
+      links.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = '☰';
+    };
+    const openMenu = () => {
+      links.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.textContent = '✕';
+    };
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      links.classList.contains('is-open') ? closeMenu() : openMenu();
     });
-    links.querySelectorAll('a').forEach((a) =>
-      a.addEventListener('click', () => {
-        links.classList.remove('is-open');
-        links.style.display = '';
-      })
-    );
+
+    links.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', (e) => {
+      if (links.classList.contains('is-open') && !links.contains(e.target) && e.target !== toggle) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 680) closeMenu();
+    });
   }
 
   /* ---------- Copy-to-clipboard for code blocks ---------- */
