@@ -27,6 +27,11 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -438,6 +443,7 @@ h1, h2, h3, h4 {
   overflow-x: auto;
   white-space: nowrap;
   flex: 1;
+  min-width: 0;
 }
 .install-line button {
   flex-shrink: 0;
@@ -609,7 +615,7 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 680px) {
-  .nav__cta .btn--ghost span.only-desktop { display: none; }
+  .nav__cta a.only-desktop { display: none; }
   .nav__toggle { display: flex; align-items: center; justify-content: center; }
 
   .nav__links {
