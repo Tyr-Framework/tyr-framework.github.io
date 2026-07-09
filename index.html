@@ -31,6 +31,7 @@
       <a href="#quickstart">Quick Start</a>
       <a href="#examples">Examples</a>
       <a href="#modules">Modules</a>
+      <a href="#publish">Publish</a>
     </div>
     <div class="nav__cta">
       <a class="btn btn--ghost btn--sm only-desktop" href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener"><span class="only-desktop">npm</span></a>
@@ -415,31 +416,108 @@ tyr --manifest              <span class="tok-com"># generates ~/.tyr/manifest.js
     </div>
   </section>
 
-  <!-- ============ COMMUNITY / FORKS ============ -->
-  <section class="section-pad--tight" style="background:var(--bg-alt);">
+  <!-- ============ PUBLISH YOUR OWN DISTRIBUTION ============ -->
+  <section id="publish" class="section-pad" style="background:var(--bg-alt);">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Community</div>
-        <h2>A hybrid open community model</h2>
-        <p>The main repository is open, and anyone can publish their own distribution under their own npm scope — no permission required.</p>
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> For your team</div>
+        <h2>Publish your own distribution</h2>
+        <p>
+          The main repository is open — anyone can fork it and publish their own version under their
+          own npm scope, no permission required. Five steps and your team has a private <code>npm install</code>.
+        </p>
       </div>
-      <div class="grid grid--3 reveal">
-        <div class="card">
-          <div class="card__icon">🍴</div>
-          <h3>Fork it</h3>
-          <p>Fork the repository and improve whatever you like. You don't need the maintainer's permission.</p>
+
+      <div class="tutorial reveal">
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">1</div>
+          <div class="tutorial-step__body">
+            <h3>Fork &amp; clone</h3>
+            <p>Fork <code>orxataguy/TyrFramework</code> on GitHub, then clone your fork locally.</p>
+            <div class="code">
+              <div class="code__bar">
+                <div class="code__dots"><span></span><span></span><span></span></div>
+                <span class="code__label">terminal</span>
+                <button class="code__copy">Copy</button>
+              </div>
+              <pre><code>git clone https://github.com/your-team/TyrFramework.git
+<span class="tok-fn">cd</span> TyrFramework</code></pre>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <div class="card__icon">🚀</div>
-          <h3>Publish your version</h3>
-          <p>Change <code>name</code> in <code>package.json</code> to your own scope, add your <code>NPM_TOKEN</code>, and push a <code>vX.Y.Z</code> tag.</p>
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">2</div>
+          <div class="tutorial-step__body">
+            <h3>Rename the package</h3>
+            <p>Point <code>package.json</code> at your own npm scope — this is the name your team will install.</p>
+            <div class="code">
+              <div class="code__bar">
+                <div class="code__dots"><span></span><span></span><span></span></div>
+                <span class="code__label">package.json</span>
+                <button class="code__copy">Copy</button>
+              </div>
+              <pre><code>{
+  <span class="tok-str">"name"</span>: <span class="tok-str">"@your-team/tyr"</span>
+}</code></pre>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <div class="card__icon">📋</div>
-          <h3>Get listed in COMMUNITY.md</h3>
-          <p>Open a PR adding your fork to the distributions table so others can discover it.</p>
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">3</div>
+          <div class="tutorial-step__body">
+            <h3>Add an <code>NPM_TOKEN</code> secret</h3>
+            <p>
+              Generate an npm access token (npmjs.com → your avatar → Access Tokens → Generate New
+              Token), then add it to your fork: <strong>Settings → Secrets and variables → Actions →
+              New repository secret</strong>, named <code>NPM_TOKEN</code>.
+            </p>
+          </div>
         </div>
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">4</div>
+          <div class="tutorial-step__body">
+            <h3>Tag a release</h3>
+            <p>The included fork-release workflow installs dependencies, runs your tests, publishes to npm under your scope, and cuts a GitHub Release — all automatically.</p>
+            <div class="code">
+              <div class="code__bar">
+                <div class="code__dots"><span></span><span></span><span></span></div>
+                <span class="code__label">terminal</span>
+                <button class="code__copy">Copy</button>
+              </div>
+              <pre><code>git tag v1.0.0
+git push origin v1.0.0</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">5</div>
+          <div class="tutorial-step__body">
+            <h3>Install it across your team</h3>
+            <p>Anyone on your team can now install and initialize your distribution exactly like the original.</p>
+            <div class="code">
+              <div class="code__bar">
+                <div class="code__dots"><span></span><span></span><span></span></div>
+                <span class="code__label">terminal</span>
+                <button class="code__copy">Copy</button>
+              </div>
+              <pre><code>npm install -g @your-team/tyr
+tyr install</code></pre>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <p class="directory-note reveal">
+        Prefer to keep contributing back? Open a PR adding your fork to
+        <a href="https://github.com/orxataguy/TyrFramework/blob/main/COMMUNITY.md" target="_blank" rel="noopener">COMMUNITY.md</a>
+        so others can discover it.
+      </p>
     </div>
   </section>
 
@@ -473,6 +551,7 @@ tyr --manifest              <span class="tok-com"># generates ~/.tyr/manifest.js
           <a href="#features">Features</a>
           <a href="#examples">Examples</a>
           <a href="#modules">Modules</a>
+          <a href="#publish">Publish</a>
         </div>
         <div class="footer__col">
           <h4>Resources</h4>
