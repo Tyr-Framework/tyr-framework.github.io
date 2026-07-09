@@ -214,7 +214,7 @@ tyr install</code></pre>
               <span class="code__label">greet.tyr.ts</span>
               <button class="code__copy">Copy</button>
             </div>
-            <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+            <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
 
 <span class="tok-kw">export default</span> ({ task, fail, logger }: TyrContext) => {
     <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
@@ -263,7 +263,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel is-active" id="ex-docker">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
 
 <span class="tok-com">// Bring up a full stack, then start a standalone container alongside it.</span>
 <span class="tok-kw">export default</span> ({ task, fail, docker, logger }: TyrContext) => {
@@ -295,7 +295,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel" id="ex-ai-agent">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
 
 <span class="tok-com">// Let the agent explore your codebase, propose changes as Search/Replace</span>
 <span class="tok-com">// blocks, apply them, and validate the result in a sandbox before returning.</span>
@@ -317,7 +317,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel" id="ex-ai-chat">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
 
 <span class="tok-com">// Spin up a local chat UI and decide exactly how it answers.</span>
 <span class="tok-kw">export default</span> ({ chat, aiVendor, logger }: TyrContext) => {
