@@ -503,8 +503,8 @@ h1, h2, h3, h4 {
 }
 .tutorial-step {
   position: relative;
-  display: grid;
-  grid-template-columns: 56px 1fr;
+  display: flex;
+  align-items: flex-start;
   gap: 20px;
   padding-bottom: 36px;
 }
@@ -512,28 +512,30 @@ h1, h2, h3, h4 {
 .tutorial-step:not(:last-child)::before {
   content: '';
   position: absolute;
-  left: 27px;
-  top: 42px;
+  left: 19px;
+  top: 44px;
   bottom: 0;
-  width: 1px;
+  width: 2px;
   background: var(--border-light);
 }
 .tutorial-step__num {
   position: relative;
   z-index: 1;
+  flex: 0 0 40px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(232, 182, 76, 0.12);
-  border: 1px solid rgba(232, 182, 76, 0.3);
-  color: var(--gold);
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  box-shadow: 0 4px 16px -4px rgba(232, 182, 76, 0.5);
+  color: #1a1204;
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.tutorial-step__body { flex: 1 1 auto; min-width: 0; }
 .tutorial-step__body h3 { font-size: 18px; margin-bottom: 8px; }
 .tutorial-step__body h3 code { color: var(--gold); font-family: var(--font-mono); font-size: 0.75em; }
 .tutorial-step__body p { color: var(--text-dim); font-size: 14.5px; margin: 0 0 14px; }
