@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tyr Framework — CLI framework TypeScript-native para automatización</title>
+<meta name="description" content="Tyr es un framework CLI TypeScript-native para construir, ejecutar y componer herramientas de automatización, con inyección de dependencias, documentación en vivo y un ecosistema de módulos importables." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Tyr Framework" />
+<meta property="og:description" content="Un contexto tipado e inyectado por dependencias desde el que cada comando opera. Cero boilerplate." />
+<meta property="og:image" content="./assets/img/logo.png" />
+
+<link rel="icon" type="image/png" href="./assets/img/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand">
+      <img src="./assets/img/logo.png" alt="Tyr" />
+      Tyr
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a href="#about">Qué es</a>
+      <a href="#features">Características</a>
+      <a href="#quickstart">Quick Start</a>
+      <a href="#concepts">Conceptos</a>
+      <a href="#examples">Ejemplos</a>
+      <a href="#modules">Módulos</a>
+      <a href="#ecosystem">Ecosistema</a>
+    </div>
+    <div class="nav__cta">
+      <a class="btn btn--ghost btn--sm only-desktop" href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener"><span class="only-desktop">npm</span></a>
+      <a class="btn btn--primary btn--sm" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">GitHub</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <img class="hero__logo" src="./assets/img/logo.png" alt="Tyr Framework logo" />
+      <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> TypeScript · CLI · Dependency Injection</div>
+      <h1>Un contexto para <span class="accent">gobernarlos a todos</span></h1>
+      <p class="hero__sub">
+        Tyr es un framework CLI TypeScript-native para construir, ejecutar y componer herramientas de
+        automatización — sin boilerplate. Escribe una función, <code>tyr</code> se encarga del resto:
+        routing de argumentos, inyección de dependencias, formato de errores y documentación viva.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#quickstart">Empezar ahora</a>
+        <a class="btn btn--ghost" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">Ver en GitHub</a>
+      </div>
+      <div class="hero__badges">
+        <img src="https://img.shields.io/npm/v/@orxataguy/tyr.svg" alt="npm version" />
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" />
+        <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node 18+" />
+        <img src="https://img.shields.io/badge/TypeScript-5.x-blue" alt="TypeScript" />
+      </div>
+      <div class="hero__install">
+        <div class="code">
+          <div class="code__bar">
+            <div class="code__dots"><span></span><span></span><span></span></div>
+            <span class="code__label">terminal</span>
+            <button class="code__copy">Copiar</button>
+          </div>
+          <pre><code><span class="tok-com"># instala Tyr globalmente</span>
+npm install -g @orxataguy/tyr
+
+<span class="tok-com"># inicialízalo en tu proyecto</span>
+tyr install</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <div class="container">
+    <div class="stats reveal">
+      <div class="stat"><b>19</b><span>Managers integrados</span></div>
+      <div class="stat"><b>0</b><span>Boilerplate por comando</span></div>
+      <div class="stat"><b>3</b><span>SO soportados (CI)</span></div>
+      <div class="stat"><b>MIT</b><span>Licencia, fork-friendly</span></div>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="section-pad">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> El problema</div>
+        <h2>Basta de scripts dispersos</h2>
+        <p>
+          Tyr resuelve el problema de fragmentación en el scripting de DevOps. En lugar de mantener
+          shell scripts sueltos, utilidades de Node improvisadas y automatizaciones sin documentar,
+          Tyr te da un único contexto tipado e inyectado por dependencias desde el que opera cada comando.
+        </p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="card reveal">
+          <div class="card__icon">✎</div>
+          <h3>Escribes una función</h3>
+          <p>Cada comando es una función exportada que recibe un <code>TyrContext</code> completamente resuelto. Nada de wiring manual.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">⚙</div>
+          <h3>Tyr resuelve el resto</h3>
+          <p>Routing de argumentos, inyección de dependencias, formateo de errores y documentación en vivo, automáticos.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">⇪</div>
+          <h3>Compón y distribuye</h3>
+          <p>Invoca comandos entre sí, publícalos como módulos importables, o crea tu propia distribución en npm.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section id="features" class="section-pad" style="background:var(--bg-alt);">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Por qué Tyr</div>
+        <h2>Todo lo que aporta el framework</h2>
+        <p>Un núcleo pequeño y predecible, con superpoderes opcionales cuando los necesitas.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="card reveal">
+          <div class="card__icon">🧩</div>
+          <h3>Inyección de dependencias real</h3>
+          <p>El <code>Container</code> instancia cada Manager una sola vez y lo inyecta vía <code>TyrContext</code>. Nunca importas un Manager a mano.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">⚡</div>
+          <h3>Cero boilerplate</h3>
+          <p><code>tyr gen &lt;nombre&gt;</code> crea el archivo del comando y lo registra en <code>map.yml</code> automáticamente.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">📖</div>
+          <h3>Documentación en vivo</h3>
+          <p><code>tyr doc</code> parsea el JSDoc de todos los Managers y sirve una referencia HTML interactiva en local.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🛡</div>
+          <h3>Errores controlados</h3>
+          <p><code>fail()</code> para validaciones esperadas, <code>task()</code> para envolver operaciones async con contexto de error automático.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🌐</div>
+          <h3>19 Managers listos</h3>
+          <p>Shell, filesystem, git, Docker, SQL, MongoDB, web scraping, Jira, IA multi-vendor y más — todo con tipos.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">📦</div>
+          <h3>Ecosistema de módulos</h3>
+          <p>Importa comandos de terceros con <code>tyr --add</code> a partir de un simple <code>manifest.json</code> en GitHub.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🤖</div>
+          <h3>IA nativa, multi-vendor</h3>
+          <p><code>AIVendorManager</code> normaliza Anthropic, OpenAI y Gemini bajo una misma interfaz de mensajes y herramientas.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">💬</div>
+          <h3>Chat web integrado</h3>
+          <p><code>tyr chat</code> abre una app local con panel de chat y explorador de archivos, lista para conectar tu propio vendor de IA.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🖥</div>
+          <h3>Cross-platform</h3>
+          <p>CI verificado en Ubuntu, Windows y macOS. El mismo comando se comporta igual en cualquier sistema.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUICK START ============ -->
+  <section id="quickstart" class="section-pad">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Quick Start</div>
+        <h2>De cero a comando en tres pasos</h2>
+        <p>Sin configuración previa. Sin ceremonia. Solo escribe la lógica.</p>
+      </div>
+
+      <div class="grid grid--3 reveal">
+        <div>
+          <div class="eyebrow"><span class="rune">1</span> Crear el comando</div>
+          <div class="code">
+            <div class="code__bar">
+              <div class="code__dots"><span></span><span></span><span></span></div>
+              <span class="code__label">terminal</span>
+              <button class="code__copy">Copiar</button>
+            </div>
+            <pre><code>tyr gen greet greet</code></pre>
+          </div>
+          <p class="example-desc">Genera <code>src/commands/greet.tyr.ts</code> y lo registra en <code>config/map.yml</code>.</p>
+        </div>
+
+        <div>
+          <div class="eyebrow"><span class="rune">2</span> Editar el comando</div>
+          <div class="code">
+            <div class="code__bar">
+              <div class="code__dots"><span></span><span></span><span></span></div>
+              <span class="code__label">greet.tyr.ts</span>
+              <button class="code__copy">Copiar</button>
+            </div>
+            <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+
+<span class="tok-kw">export default</span> ({ task, fail, logger }: TyrContext) => {
+    <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
+        <span class="tok-kw">if</span> (args.length === <span class="tok-num">0</span>) {
+            fail(<span class="tok-str">'A name is required'</span>, <span class="tok-str">'Usage: tyr greet &lt;name&gt;'</span>);
+        }
+        <span class="tok-kw">await</span> task(<span class="tok-str">'Greeting'</span>, <span class="tok-kw">async</span> () => {
+            logger.success(<span class="tok-str">`Hello, ${args[<span class="tok-num">0</span>]}!`</span>);
+        });
+    };
+};</code></pre>
+          </div>
+        </div>
+
+        <div>
+          <div class="eyebrow"><span class="rune">3</span> Ejecutarlo</div>
+          <div class="code">
+            <div class="code__bar">
+              <div class="code__dots"><span></span><span></span><span></span></div>
+              <span class="code__label">terminal</span>
+              <button class="code__copy">Copiar</button>
+            </div>
+            <pre><code>tyr greet World
+<span class="tok-com">→ ✔ Hello, World!</span></code></pre>
+          </div>
+          <p class="example-desc">Los comandos se registran automáticamente y quedan disponibles como sub-comandos de <code>tyr</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORE CONCEPTS ============ -->
+  <section id="concepts" class="section-pad" style="background:var(--bg-alt);">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Arquitectura</div>
+        <h2>Conceptos clave</h2>
+        <p>Cuatro piezas que explican todo el framework.</p>
+      </div>
+
+      <div class="concept reveal">
+        <div class="concept__text">
+          <span class="concept__tag">01 · Kernel</span>
+          <h3>El motor de ejecución</h3>
+          <p>El Kernel arranca en cada invocación, carga <code>config/map.yml</code>, resuelve el nombre del comando a un módulo y lo ejecuta con un <code>TyrContext</code> completamente montado.</p>
+          <p>Nunca lo instancias tú mismo — corre automáticamente vía <code>bin/tyr.js</code>.</p>
+        </div>
+        <div>
+          <div class="code">
+            <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__label">flujo</span></div>
+            <pre><code>tyr deploy --force
+   │
+   ▼
+<span class="tok-fn">Kernel</span>.<span class="tok-fn">run</span>(<span class="tok-str">'deploy'</span>, [<span class="tok-str">'--force'</span>])
+   │  lee config/map.yml
+   ▼
+<span class="tok-fn">Container</span>.<span class="tok-fn">resolve</span>() <span class="tok-com">// construye TyrContext</span>
+   │
+   ▼
+deploy.tyr.ts(<span class="tok-prop">ctx</span>)(args)</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept reveal">
+        <div class="concept__text">
+          <span class="concept__tag">02 · Container &amp; DI</span>
+          <h3>Todos los Managers, un único punto</h3>
+          <p>El <code>Container</code> instancia cada Manager una sola vez y lo inyecta en cada comando a través del <code>TyrContext</code>. Nunca importas un Manager directamente — lo desestructuras del contexto.</p>
+        </div>
+        <div>
+          <div class="code">
+            <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__label">deploy.tyr.ts</span></div>
+            <pre><code><span class="tok-kw">export default</span> ({ shell, fs, git, logger }: TyrContext) => {
+    <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
+        <span class="tok-kw">const</span> branch = <span class="tok-kw">await</span> git.currentBranch();
+        logger.info(<span class="tok-str">`On branch: ${branch}`</span>);
+    };
+};</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept reveal">
+        <div class="concept__text">
+          <span class="concept__tag">03 · TyrContext</span>
+          <h3>Tu API de superpoderes</h3>
+          <p>El objeto inyectado en cada comando. Expone todos los Managers disponibles más utilidades del framework:</p>
+          <ul>
+            <li><code>logger</code> — salida coloreada por terminal</li>
+            <li><code>task(label, fn)</code> — envuelve operaciones async con contexto de error</li>
+            <li><code>fail(msg, suggestion?)</code> — lanza un <code>TyrError</code> controlado</li>
+            <li><code>run(cmd, args)</code> — invoca otro comando Tyr programáticamente</li>
+            <li><code>shell</code>, <code>fs</code>, <code>git</code>, <code>docker</code>, <code>sql</code>, <code>web</code>… — todos los Managers</li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+            <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__label">error handling</span></div>
+            <pre><code><span class="tok-com">// controlado: validación esperada</span>
+fail(<span class="tok-str">'Config file not found'</span>, <span class="tok-str">'Create a config.yml.'</span>);
+
+<span class="tok-com">// no controlado: se envuelve y se formatea</span>
+<span class="tok-kw">await</span> task(<span class="tok-str">'Connecting to database'</span>, <span class="tok-kw">async</span> () => {
+    <span class="tok-kw">await</span> sql.connect(connectionString);
+});
+
+<span class="tok-com">// stack trace completo</span>
+<span class="tok-com">// $ tyr deploy --debug</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="concept reveal">
+        <div class="concept__text">
+          <span class="concept__tag">04 · Commands</span>
+          <h3>Composición sin fricción</h3>
+          <p>Un comando es una función exportada por defecto que recibe un <code>TyrContext</code> y devuelve un handler async. Se registran en <code>config/map.yml</code> y pueden invocarse entre sí con <code>run()</code>, habilitando pipelines completos a partir de piezas pequeñas.</p>
+        </div>
+        <div>
+          <div class="code">
+            <div class="code__bar"><div class="code__dots"><span></span><span></span><span></span></div><span class="code__label">config/map.yml</span></div>
+            <pre><code><span class="tok-prop">commands</span>:
+  <span class="tok-prop">greet</span>: ./src/commands/greet.tyr.ts
+  <span class="tok-prop">deploy</span>: ./src/commands/deploy.tyr.ts
+  <span class="tok-prop">rollback</span>: ./src/commands/rollback.tyr.ts</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXAMPLES ============ -->
+  <section id="examples" class="section-pad">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Ejemplos</div>
+        <h2>Tyr en acción</h2>
+        <p>De un saludo a un agente de IA que edita tu código — mismo patrón, mismo contexto.</p>
+      </div>
+
+      <div class="code reveal" style="text-align:left;">
+        <div class="example-tabs">
+          <button class="example-tab is-active" data-target="ex-deploy">Deploy compuesto</button>
+          <button class="example-tab" data-target="ex-ai">Agente de IA</button>
+          <button class="example-tab" data-target="ex-chat">Chat web</button>
+          <button class="example-tab" data-target="ex-module">Módulo importado</button>
+        </div>
+
+        <div class="example-panel is-active" id="ex-deploy">
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'../core/Kernel'</span>;
+
+<span class="tok-com">// Compón varios Managers en un único pipeline, con manejo de errores automático.</span>
+<span class="tok-kw">export default</span> ({ task, fail, git, docker, shell, logger }: TyrContext) => {
+    <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
+        <span class="tok-kw">const</span> branch = <span class="tok-kw">await</span> git.currentBranch();
+        <span class="tok-kw">if</span> (branch !== <span class="tok-str">'main'</span> && !args.includes(<span class="tok-str">'--force'</span>)) {
+            fail(<span class="tok-str">`Refusing to deploy from '${branch}'`</span>, <span class="tok-str">'Use --force to override.'</span>);
+        }
+
+        <span class="tok-kw">await</span> task(<span class="tok-str">'Building image'</span>, <span class="tok-kw">async</span> () => {
+            <span class="tok-kw">await</span> docker.compose.up({ build: <span class="tok-kw">true</span>, detach: <span class="tok-kw">true</span> });
+        });
+
+        <span class="tok-kw">await</span> task(<span class="tok-str">'Running migrations'</span>, <span class="tok-kw">async</span> () => {
+            <span class="tok-kw">await</span> shell.exec(<span class="tok-str">'npm run migrate'</span>);
+        });
+
+        logger.success(<span class="tok-str">`Deployed from ${branch} 🚀`</span>);
+    };
+};</code></pre>
+        </div>
+
+        <div class="example-panel" id="ex-ai">
+          <pre><code><span class="tok-com">// AIContextManager orquesta el loop de la IA: explora el proyecto, aplica</span>
+<span class="tok-com">// cambios como bloques Search/Replace y valida el resultado en un sandbox.</span>
+<span class="tok-kw">export default</span> ({ aiContext, prompts, tokens, logger }: TyrContext) => {
+    <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
+        <span class="tok-kw">const</span> tree = <span class="tok-kw">await</span> aiContext.buildExplorationTree(process.cwd());
+        <span class="tok-kw">const</span> messages = <span class="tok-kw">await</span> prompts.build(<span class="tok-str">'ai-code'</span>, { task: args.join(<span class="tok-str">' '</span>), tree }, process.cwd());
+
+        <span class="tok-kw">const</span> result = <span class="tok-kw">await</span> aiContext.runCodeAgent(process.cwd(), messages, tokens, {
+            priority: <span class="tok-str">'media-prioridad'</span>,
+        });
+
+        logger.success(<span class="tok-str">`${result.filesChanged.length} archivo(s) modificados`</span>);
+    };
+};</code></pre>
+        </div>
+
+        <div class="example-panel" id="ex-chat">
+          <pre><code><span class="tok-com">// ChatManager expone una app de chat local con panel de archivos.</span>
+<span class="tok-kw">export default</span> ({ chat, aiVendor, logger }: TyrContext) => {
+    <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
+        chat.onMessage(<span class="tok-kw">async</span> ({ message, history, dir }) => {
+            <span class="tok-kw">const</span> result = <span class="tok-kw">await</span> aiVendor.complete([{ role: <span class="tok-str">'user'</span>, content: message.text }]);
+            <span class="tok-kw">return</span> result.content;
+        });
+
+        <span class="tok-kw">const</span> session = <span class="tok-kw">await</span> chat.open(args[<span class="tok-num">0</span>] ?? process.cwd(), { splitRatio: <span class="tok-num">0.4</span> });
+        logger.success(<span class="tok-str">`Chat ready at: ${session.url}`</span>);
+    };
+};
+
+<span class="tok-com">// $ tyr chat ./mi-proyecto --split 0.35</span>
+<span class="tok-com">// → Chat ready at: http://localhost:4646</span></code></pre>
+        </div>
+
+        <div class="example-panel" id="ex-module">
+          <pre><code><span class="tok-com"># Instala comandos de terceros a partir de un manifest.json remoto</span>
+tyr --add https://raw.githubusercontent.com/someuser/tyr-modules/main/manifest.json my-module
+
+tyr --modules            <span class="tok-com"># lista módulos registrados</span>
+tyr --modules sync       <span class="tok-com"># reinstala lo que falte</span>
+tyr --update              <span class="tok-com"># git pull + refresco forzado</span>
+tyr --del my-module       <span class="tok-com"># desinstala el módulo por completo</span>
+
+<span class="tok-com"># Publica tu propia colección de comandos</span>
+tyr --config --repo https://github.com/tu-usuario/tus-comandos
+tyr --manifest             <span class="tok-com"># genera ~/.tyr/manifest.json</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODULES ============ -->
+  <section id="modules" class="section-pad" style="background:var(--bg-alt);">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Módulos destacados</div>
+        <h2>Un ecosistema de Managers listo para usar</h2>
+        <p>19 Managers cubren desde shell y git hasta bases de datos y agentes de IA. Estos son los más interesantes.</p>
+      </div>
+
+      <div class="grid grid--4 reveal" style="margin-bottom:56px;">
+        <div class="module-card module-card--highlight">
+          <div class="module-card__head"><span class="module-card__name">AIContextManager</span></div>
+          <p>Orquesta el agente de código: explora el proyecto, aplica cambios como parches Search/Replace bajo un guard anti-sobrescritura y valida el resultado en sandbox, con auto-reintento si algo falla.</p>
+        </div>
+        <div class="module-card module-card--highlight">
+          <div class="module-card__head"><span class="module-card__name">AIVendorManager</span></div>
+          <p>Abstrae Anthropic, OpenAI y Gemini bajo una interfaz normalizada de mensajes, bloques de contenido y tool-use. Cambia de vendor sin tocar tu lógica de comando.</p>
+        </div>
+        <div class="module-card module-card--highlight">
+          <div class="module-card__head"><span class="module-card__name">ChatManager</span></div>
+          <p>Levanta una app web local con chat y explorador de archivos. Adjunta imágenes, redimensiona paneles y conecta tu propio handler de respuestas.</p>
+        </div>
+        <div class="module-card module-card--highlight">
+          <div class="module-card__head"><span class="module-card__name">SandboxManager</span></div>
+          <p>Ejecuta y valida cambios de forma aislada antes de darlos por buenos — la red de seguridad que usa el agente de IA antes de tocar tus archivos de verdad.</p>
+        </div>
+      </div>
+
+      <div class="tabs reveal">
+        <button class="tab is-active" data-filter="all">Todos</button>
+        <button class="tab" data-filter="core">Core &amp; sistema</button>
+        <button class="tab" data-filter="integrations">Integraciones</button>
+        <button class="tab" data-filter="data">Datos</button>
+        <button class="tab" data-filter="ai">IA</button>
+      </div>
+
+      <div class="module-grid reveal">
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">ShellManager</span><span class="module-card__ctx">shell</span></div><p>Ejecuta comandos del sistema y mantiene el CWD para encadenar operaciones en carpetas concretas.</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">FileSystemManager</span><span class="module-card__ctx">fs</span></div><p>Capa de abstracción sobre el filesystem, con backups automáticos al sobrescribir y escrituras idempotentes.</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">GitManager</span><span class="module-card__ctx">git</span></div><p>Wrapper de operaciones Git comunes: init, commits, clonado y consulta de rama actual.</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">SystemManager</span><span class="module-card__ctx">system</span></div><p>Utilidades de mantenimiento del SO, como liberar un puerto ocupado (<code>killPort</code>).</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">PackageManager</span><span class="module-card__ctx">pkg</span></div><p>Gestor de paquetes agnóstico al SO: detecta apt, brew o dnf e instala software nativo.</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">WorkspaceManager</span><span class="module-card__ctx">workspace</span></div><p>Gestiona directorios de trabajo locales: detecta repos existentes, crea ramas y abre el proyecto en VSCode.</p></div>
+        <div class="module-card" data-cat="core"><div class="module-card__head"><span class="module-card__name">SetupManager</span><span class="module-card__ctx">setup</span></div><p>Bootstrap de entornos de desarrollo: detección de SO, dependencias, docker-compose y generación de Makefiles.</p></div>
+
+        <div class="module-card" data-cat="integrations"><div class="module-card__head"><span class="module-card__name">DockerManager</span><span class="module-card__ctx">docker</span></div><p>Manager de bajo nivel sobre el Docker Daemon: arranca contenedores, comprueba estados y gestiona stacks de Compose.</p></div>
+        <div class="module-card" data-cat="integrations"><div class="module-card__head"><span class="module-card__name">WebManager</span><span class="module-card__ctx">web</span></div><p>Peticiones HTTP y scraping con cheerio, listo para consumir APIs o extraer datos de páginas.</p></div>
+        <div class="module-card" data-cat="integrations"><div class="module-card__head"><span class="module-card__name">JiraManager</span><span class="module-card__ctx">jira</span></div><p>Integración con la API REST de Jira: trae y selecciona issues asignadas, con fallback manual si Jira no está disponible.</p></div>
+
+        <div class="module-card" data-cat="data"><div class="module-card__head"><span class="module-card__name">SQLManager</span><span class="module-card__ctx">sql</span></div><p>Conector para SQL Server (MSSQL) con gestión de pool de conexiones.</p></div>
+        <div class="module-card" data-cat="data"><div class="module-card__head"><span class="module-card__name">MongoManager</span><span class="module-card__ctx">mongo</span></div><p>Conector MongoDB que gestiona el ciclo de vida de la conexión y expone un CRUD genérico.</p></div>
+
+        <div class="module-card" data-cat="ai"><div class="module-card__head"><span class="module-card__name">MemoryManager</span><span class="module-card__ctx">memory</span></div><p>Memoria persistente de conversaciones de IA por proyecto — solo gasta tokens de contexto cuando de verdad ayuda.</p></div>
+        <div class="module-card" data-cat="ai"><div class="module-card__head"><span class="module-card__name">TokenManager</span><span class="module-card__ctx">tokens</span></div><p>Estima el coste en tokens de un prompt antes de enviarlo y registra el uso real una vez completada la petición.</p></div>
+        <div class="module-card" data-cat="ai"><div class="module-card__head"><span class="module-card__name">PromptTemplateManager</span><span class="module-card__ctx">prompts</span></div><p>Plantillas de sistema/usuario reutilizables para instrucciones de IA uniformes en todo el framework.</p></div>
+      </div>
+
+      <p class="module-more">+ AIContextManager · AIVendorManager · ChatManager · SandboxManager — ver arriba ↑</p>
+    </div>
+  </section>
+
+  <!-- ============ ECOSYSTEM ============ -->
+  <section id="ecosystem" class="section-pad">
+    <div class="container">
+      <div class="ecosystem reveal">
+        <div>
+          <div class="eyebrow"><span class="rune">ᛏ</span> Ecosistema abierto</div>
+          <h3>Instala y publica comandos como módulos</h3>
+          <p>
+            Cualquiera puede distribuir comandos como un <code>manifest.json</code> — un mapa plano de
+            nombre de comando a la URL raw de su archivo <code>.tyr.ts</code> en GitHub. Tyr los instala,
+            los actualiza y los desinstala sin tocar tus comandos escritos a mano.
+          </p>
+          <ul class="ecosystem__steps">
+            <li>Registra un módulo con <code>tyr --add &lt;url-manifest&gt; [nombre]</code></li>
+            <li>Sincroniza todos con <code>tyr --modules sync</code></li>
+            <li>Fuerza refresco con <code>tyr --update</code></li>
+            <li>Desinstala limpio con <code>tyr --del &lt;nombre&gt;</code></li>
+          </ul>
+        </div>
+        <div class="code" style="text-align:left;">
+          <div class="code__bar">
+            <div class="code__dots"><span></span><span></span><span></span></div>
+            <span class="code__label">manifest.json</span>
+            <button class="code__copy">Copiar</button>
+          </div>
+          <pre><code>{
+  <span class="tok-str">"deploy"</span>: <span class="tok-str">"https://raw.githubusercontent.com/someuser/tyr-modules/main/deploy.tyr.ts"</span>,
+  <span class="tok-str">"rollback"</span>: <span class="tok-str">"https://raw.githubusercontent.com/someuser/tyr-modules/main/rollback.tyr.ts"</span>,
+  <span class="tok-str">"$env"</span>: <span class="tok-str">"https://raw.githubusercontent.com/someuser/tyr-modules/main/.env.example"</span>
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNITY / FORKS ============ -->
+  <section class="section-pad--tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" style="justify-content:center;"><span class="rune">ᛏ</span> Comunidad</div>
+        <h2>Modelo híbrido de comunidad abierta</h2>
+        <p>El repositorio principal es abierto y cualquiera puede publicar su propia distribución bajo su propio scope de npm — sin pedir permiso.</p>
+      </div>
+      <div class="grid grid--3 reveal">
+        <div class="card">
+          <div class="card__icon">🍴</div>
+          <h3>Haz fork</h3>
+          <p>Haz fork del repositorio y mejora lo que quieras. No necesitas permiso del mantenedor original.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">🚀</div>
+          <h3>Publica tu versión</h3>
+          <p>Cambia el <code>name</code> en <code>package.json</code> a tu propio scope, añade tu <code>NPM_TOKEN</code> y haz push de un tag <code>vX.Y.Z</code>.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">📋</div>
+          <h3>Listado en COMMUNITY.md</h3>
+          <p>Abre una PR añadiendo tu fork a la tabla de distribuciones para que otros lo descubran.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="cta reveal">
+        <h2>Deja de pegar scripts. Empieza a componer comandos.</h2>
+        <p>Instala Tyr, genera tu primer comando y ten documentación en vivo en menos de cinco minutos.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener">npm install -g @orxataguy/tyr</a>
+          <a class="btn btn--ghost" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">Explorar el código</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#top" class="nav__brand"><img src="./assets/img/logo.png" alt="Tyr" />Tyr</a>
+        <p>Framework CLI TypeScript-native para construir, ejecutar y componer herramientas de automatización — con cero boilerplate.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Framework</h4>
+          <a href="#about">Qué es Tyr</a>
+          <a href="#features">Características</a>
+          <a href="#concepts">Conceptos clave</a>
+          <a href="#modules">Módulos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Recursos</h4>
+          <a href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">Repositorio</a>
+          <a href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener">Paquete npm</a>
+          <a href="https://github.com/orxataguy/TyrFramework/blob/main/COMMUNITY.md" target="_blank" rel="noopener">Distribuciones</a>
+          <a href="https://github.com/orxataguy/TyrFramework/blob/main/LICENSE" target="_blank" rel="noopener">Licencia MIT</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span><span class="rune">ᛏ</span> Tyr Framework — <span id="year">2026</span></span>
+      <span>Creado por <a href="https://github.com/orxataguy" target="_blank" rel="noopener" style="color:var(--gold);">Manel Andreu Pérez</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="./assets/js/main.js"></script>
+</body>
+</html>
