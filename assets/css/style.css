@@ -135,7 +135,7 @@ h1, h2, h3, h4 {
   color: var(--text-dim);
   transition: color 0.15s ease;
 }
-.nav__links a:hover { color: var(--gold); }
+.nav__links a:hover, .nav__links a.is-current { color: var(--gold); }
 .nav__cta {
   display: flex;
   align-items: center;
@@ -329,78 +329,6 @@ h1, h2, h3, h4 {
 .card h3 { font-size: 17px; margin-bottom: 8px; font-family: var(--font-body); font-weight: 650; }
 .card p { color: var(--text-dim); font-size: 14.5px; margin: 0; }
 
-/* ---------- Concepts (alternating rows) ---------- */
-.concept {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  padding: 56px 0;
-  border-bottom: 1px solid var(--border);
-}
-.concept:last-child { border-bottom: none; }
-.concept:nth-child(even) .concept__text { order: 2; }
-.concept__tag {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ice);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  display: block;
-}
-.concept__text h3 { font-size: 24px; }
-.concept__text p { color: var(--text-dim); font-size: 15.5px; margin-bottom: 14px; }
-.concept__text ul { color: var(--text-dim); font-size: 14.5px; padding-left: 20px; margin: 14px 0 0; }
-.concept__text li { margin-bottom: 6px; }
-.concept__text li code { color: var(--gold); font-family: var(--font-mono); font-size: 0.92em; }
-
-/* ---------- Modules ---------- */
-.tabs {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-.tab {
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: 1px solid var(--border-light);
-  background: transparent;
-  color: var(--text-dim);
-  font-size: 13px;
-  font-family: var(--font-mono);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-.tab:hover { color: var(--text); border-color: var(--gold); }
-.tab.is-active { background: var(--gold); color: #1a1204; border-color: var(--gold); font-weight: 600; }
-
-.module-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-.module-card:hover { border-color: var(--gold); transform: translateY(-2px); }
-.module-card__head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.module-card__name { font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: #fff; }
-.module-card__ctx { font-family: var(--font-mono); font-size: 11.5px; color: var(--ice); background: rgba(85,201,232,0.08); padding: 2px 8px; border-radius: 5px; margin-left: auto; }
-.module-card p { color: var(--text-dim); font-size: 13.5px; margin: 0; }
-.module-card--highlight { border-color: rgba(232, 182, 76, 0.35); background: linear-gradient(160deg, rgba(232,182,76,0.06), var(--bg-card) 60%); }
-
-.module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-
-.module-more {
-  margin-top: 44px;
-  text-align: center;
-  color: var(--text-dimmer);
-  font-size: 13.5px;
-  font-family: var(--font-mono);
-}
-
 /* ---------- Examples ---------- */
 .example-tabs {
   display: flex;
@@ -427,7 +355,113 @@ h1, h2, h3, h4 {
 .example-panel.is-active { display: block; }
 .example-desc { color: var(--text-dim); font-size: 14.5px; margin: 16px 0; }
 
-/* ---------- Ecosystem / import banner ---------- */
+/* ---------- Module directory (JSON-driven) ---------- */
+.module-directory {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.module-directory__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-dimmer);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  padding: 40px 0;
+}
+.module-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.module-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.module-card__head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.module-card__name { font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: #fff; }
+.module-card__badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ice);
+  background: rgba(85,201,232,0.08);
+  border: 1px solid rgba(85,201,232,0.25);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.module-card__author { font-family: var(--font-mono); font-size: 12px; color: var(--text-dimmer); margin-left: auto; }
+.module-card p { color: var(--text-dim); font-size: 13.5px; margin: 0 0 14px; }
+.module-card__links { display: flex; gap: 16px; margin-bottom: 14px; }
+.module-card__links a { font-size: 12.5px; color: var(--gold); font-family: var(--font-mono); }
+.module-card__links a:hover { text-decoration: underline; }
+.module-card__manifest {
+  background: #0d0f15;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.module-card__manifest summary {
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-dimmer);
+  cursor: pointer;
+  user-select: none;
+}
+.module-card__manifest summary:hover { color: var(--text-dim); }
+.module-card__manifest pre {
+  margin: 0;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.install-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0d0f15;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px 8px 14px;
+}
+.install-line code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ice);
+  overflow-x: auto;
+  white-space: nowrap;
+  flex: 1;
+}
+.install-line button {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.install-line button:hover { color: var(--gold); border-color: var(--gold); }
+
+.directory-note {
+  text-align: center;
+  color: var(--text-dimmer);
+  font-size: 13.5px;
+  margin-bottom: 64px;
+}
+.directory-note a { color: var(--gold); }
+.directory-note a:hover { text-decoration: underline; }
+
+/* ---------- Ecosystem panels ---------- */
 .ecosystem {
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -437,8 +471,10 @@ h1, h2, h3, h4 {
   grid-template-columns: 1.1fr 1fr;
   gap: 48px;
   align-items: center;
+  margin-bottom: 24px;
 }
-.ecosystem h3 { font-size: 26px; }
+.ecosystem:last-child { margin-bottom: 0; }
+.ecosystem h3 { font-size: 24px; }
 .ecosystem p { color: var(--text-dim); font-size: 15px; }
 .ecosystem__steps { list-style: none; padding: 0; margin: 20px 0 0; counter-reset: step; }
 .ecosystem__steps li { counter-increment: step; padding-left: 34px; position: relative; margin-bottom: 14px; font-size: 14px; color: var(--text-dim); }
@@ -455,6 +491,7 @@ h1, h2, h3, h4 {
   font-size: 11.5px;
   display: flex; align-items: center; justify-content: center;
 }
+.ecosystem__steps li code { color: var(--gold); font-family: var(--font-mono); font-size: 0.92em; }
 
 /* ---------- Stats strip ---------- */
 .stats {
@@ -516,9 +553,7 @@ h1, h2, h3, h4 {
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); }
-  .module-grid { grid-template-columns: repeat(2, 1fr); }
-  .concept { grid-template-columns: 1fr; gap: 28px; }
-  .concept:nth-child(even) .concept__text { order: 0; }
+  .module-directory { grid-template-columns: 1fr; }
   .ecosystem { grid-template-columns: 1fr; padding: 32px; }
   .stats { grid-template-columns: repeat(2, 1fr); }
 }
@@ -527,7 +562,6 @@ h1, h2, h3, h4 {
   .nav__links, .nav__cta .btn--ghost span.only-desktop { display: none; }
   .nav__toggle { display: flex; align-items: center; justify-content: center; }
   .grid--3, .grid--4, .grid--2 { grid-template-columns: 1fr; }
-  .module-grid { grid-template-columns: 1fr; }
   .section-pad { padding: 64px 0; }
   .hero { padding: 100px 0 64px; }
   .stats { grid-template-columns: repeat(2, 1fr); }

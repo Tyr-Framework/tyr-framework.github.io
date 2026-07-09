@@ -1,0 +1,16 @@
+[
+  {
+    "name": "TyrAI",
+    "author": "OrxataGuy",
+    "description": "The official AI toolkit for Tyr. Generates AGENTS.md project docs, runs a grounded coding agent that safely reads, edits and validates your codebase, scaffolds test templates, and opens a project-aware AI chat UI backed by persistent conversation memory.",
+    "repo": "https://github.com/OrxataGuy/TyrAI",
+    "manifestUrl": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/manifest.json",
+    "manifest": {
+      "ai:describe": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/commands/ai-describe.tyr.ts",
+      "ai:code": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/commands/ai-code.tyr.ts",
+      "ai:test": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/commands/ai-test.tyr.ts",
+      "ai:chat": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/commands/ai-chat.tyr.ts",
+      "$env": "https://raw.githubusercontent.com/OrxataGuy/TyrAI/main/.env.example"
+    }
+  }
+]
