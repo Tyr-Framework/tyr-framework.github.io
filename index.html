@@ -305,7 +305,7 @@ tyr --config</code></pre>
         <span class="tok-kw">const</span> messages = <span class="tok-kw">await</span> prompts.build(<span class="tok-str">'ai-code'</span>, { task: args.join(<span class="tok-str">' '</span>), tree }, process.cwd());
 
         <span class="tok-kw">const</span> result = <span class="tok-kw">await</span> aiContext.runCodeAgent(process.cwd(), messages, tokens, {
-            priority: <span class="tok-str">'media-prioridad'</span>,
+            priority: <span class="tok-str">'mid'</span>,
         });
 
         logger.success(<span class="tok-str">`${result.filesChanged.length} file(s) changed`</span>);
