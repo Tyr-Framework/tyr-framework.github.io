@@ -34,8 +34,8 @@
       <a href="#publish">Publish</a>
     </div>
     <div class="nav__cta">
-      <a class="btn btn--ghost btn--sm only-desktop" href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener"><span class="only-desktop">npm</span></a>
-      <a class="btn btn--primary btn--sm" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--ghost btn--sm only-desktop" href="https://www.npmjs.com/package/@tyrframework/cli" target="_blank" rel="noopener"><span class="only-desktop">npm</span></a>
+      <a class="btn btn--primary btn--sm" href="https://github.com/TyrFramework/tyr" target="_blank" rel="noopener">GitHub</a>
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
   </div>
@@ -56,10 +56,10 @@
       </p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="#quickstart">Get started</a>
-        <a class="btn btn--ghost" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn btn--ghost" href="https://github.com/TyrFramework/tyr" target="_blank" rel="noopener">View on GitHub</a>
       </div>
       <div class="hero__badges">
-        <img src="https://img.shields.io/npm/v/@orxataguy/tyr.svg" alt="npm version" />
+        <img src="https://img.shields.io/npm/v/@tyrframework/cli.svg" alt="npm version" />
         <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" />
         <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node 18+" />
         <img src="https://img.shields.io/badge/TypeScript-5.x-blue" alt="TypeScript" />
@@ -72,10 +72,10 @@
             <button class="code__copy">Copy</button>
           </div>
           <pre><code><span class="tok-com"># install Tyr globally</span>
-npm install -g @orxataguy/tyr
+npm i -g @tyrframework/cli
 
 <span class="tok-com"># initialize it in your project</span>
-tyr install</code></pre>
+tyr --config</code></pre>
         </div>
       </div>
     </div>
@@ -203,7 +203,7 @@ tyr install</code></pre>
             </div>
             <pre><code>tyr gen greet greet</code></pre>
           </div>
-          <p class="example-desc">Generates <code>src/commands/greet.tyr.ts</code> and registers it in <code>config/map.yml</code>.</p>
+          <p class="example-desc">Generates <code>~/.tyr/commands/greet.tyr.ts</code> and registers it in <code>~/.tyr/map.yml</code> (run <code>tyr --config</code> once first to set up <code>~/.tyr</code>).</p>
         </div>
 
         <div>
@@ -214,7 +214,7 @@ tyr install</code></pre>
               <span class="code__label">greet.tyr.ts</span>
               <button class="code__copy">Copy</button>
             </div>
-            <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
+            <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@tyrframework/cli'</span>;
 
 <span class="tok-kw">export default</span> ({ task, fail, logger }: TyrContext) => {
     <span class="tok-kw">return</span> <span class="tok-kw">async</span> (args: string[]) => {
@@ -263,7 +263,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel is-active" id="ex-docker">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@tyrframework/cli'</span>;
 
 <span class="tok-com">// Bring up a full stack, then start a standalone container alongside it.</span>
 <span class="tok-kw">export default</span> ({ task, fail, docker, logger }: TyrContext) => {
@@ -295,7 +295,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel" id="ex-ai-agent">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@tyrframework/cli'</span>;
 
 <span class="tok-com">// Let the agent explore your codebase, propose changes as Search/Replace</span>
 <span class="tok-com">// blocks, apply them, and validate the result in a sandbox before returning.</span>
@@ -317,7 +317,7 @@ tyr install</code></pre>
         </div>
 
         <div class="example-panel" id="ex-ai-chat">
-          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@orxataguy/tyr'</span>;
+          <pre><code><span class="tok-kw">import</span> { TyrContext } <span class="tok-kw">from</span> <span class="tok-str">'@tyrframework/cli'</span>;
 
 <span class="tok-com">// Spin up a local chat UI and decide exactly how it answers.</span>
 <span class="tok-kw">export default</span> ({ chat, aiVendor, logger }: TyrContext) => {
@@ -354,8 +354,9 @@ tyr install</code></pre>
         <p class="module-directory__empty">Loading modules…</p>
       </div>
       <p class="directory-note reveal">
-        Want to be listed? Send your repository's <code>manifest.json</code> to
-        <a href="mailto:manel.andreu.it@outlook.com">manel.andreu.it@outlook.com</a> and it'll be added to the directory.
+        Want to be listed? Open a
+        <a href="https://github.com/TyrFramework/tyr/issues/new?template=module.yml" target="_blank" rel="noopener">🧩 Submit a module</a>
+        issue on GitHub and it'll be reviewed for the directory — no email, no PR needed.
       </p>
 
       <div class="ecosystem reveal">
@@ -413,6 +414,23 @@ tyr --config --repo https://github.com/you/your-commands
 tyr --manifest              <span class="tok-com"># generates ~/.tyr/manifest.json</span></code></pre>
         </div>
       </div>
+
+      <div class="ecosystem reveal">
+        <div>
+          <div class="eyebrow"><span class="rune">ᛏ</span> Before you submit</div>
+          <h3>What we check on a module submission</h3>
+          <p>
+            Anyone can open a <a href="https://github.com/TyrFramework/tyr/issues/new?template=module.yml" target="_blank" rel="noopener">module submission</a> — these are the checks the issue template itself asks you to confirm before review:
+          </p>
+        </div>
+        <div>
+          <ol class="ecosystem__steps">
+            <li>Your <code>manifest.json</code> is reachable at a <code>raw.githubusercontent.com</code> URL and follows the format above.</li>
+            <li><code>tyr --add &lt;your-manifest-url&gt;</code> actually installs it end to end, with no errors.</li>
+            <li>Command names are namespaced or distinctive enough to avoid obvious collisions with built-ins or other listed modules.</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -434,15 +452,15 @@ tyr --manifest              <span class="tok-com"># generates ~/.tyr/manifest.js
           <div class="tutorial-step__num">1</div>
           <div class="tutorial-step__body">
             <h3>Fork &amp; clone</h3>
-            <p>Fork <code>orxataguy/TyrFramework</code> on GitHub, then clone your fork locally.</p>
+            <p>Fork <code>TyrFramework/tyr</code> on GitHub, then clone your fork locally.</p>
             <div class="code">
               <div class="code__bar">
                 <div class="code__dots"><span></span><span></span><span></span></div>
                 <span class="code__label">terminal</span>
                 <button class="code__copy">Copy</button>
               </div>
-              <pre><code>git clone https://github.com/your-team/TyrFramework.git
-<span class="tok-fn">cd</span> TyrFramework</code></pre>
+              <pre><code>git clone https://github.com/your-team/tyr.git
+<span class="tok-fn">cd</span> tyr</code></pre>
             </div>
           </div>
         </div>
@@ -451,7 +469,7 @@ tyr --manifest              <span class="tok-com"># generates ~/.tyr/manifest.js
           <div class="tutorial-step__num">2</div>
           <div class="tutorial-step__body">
             <h3>Rename the package</h3>
-            <p>Point <code>package.json</code> at your own npm scope — this is the name your team will install.</p>
+            <p>Point <code>package.json</code> at your own npm scope — this is the name your team will install. Use a scope you own; <code>@tyrframework/*</code> is reserved for the official distribution and publishing under it isn't allowed.</p>
             <div class="code">
               <div class="code__bar">
                 <div class="code__dots"><span></span><span></span><span></span></div>
@@ -505,19 +523,47 @@ git push origin v1.0.0</code></pre>
                 <span class="code__label">terminal</span>
                 <button class="code__copy">Copy</button>
               </div>
-              <pre><code>npm install -g @your-team/tyr
-tyr install</code></pre>
+              <pre><code>npm i -g @your-team/tyr
+tyr --config</code></pre>
             </div>
+          </div>
+        </div>
+
+        <div class="tutorial-step">
+          <div class="tutorial-step__num">6</div>
+          <div class="tutorial-step__body">
+            <h3>Share it with the community <em style="color:var(--text-dim); font-weight:400;">(optional)</em></h3>
+            <p>
+              Want your distribution listed alongside the official one? Open a
+              <a href="https://github.com/TyrFramework/tyr/issues/new?template=distribution.yml" target="_blank" rel="noopener">📦 Submit a distribution</a>
+              issue — no PR needed, it's reviewed and added to
+              <a href="https://github.com/TyrFramework/tyr/blob/main/COMMUNITY.md" target="_blank" rel="noopener">COMMUNITY.md</a> directly from there.
+            </p>
           </div>
         </div>
 
       </div>
 
-      <p class="directory-note reveal">
-        Prefer to keep contributing back? Open a PR adding your fork to
-        <a href="https://github.com/orxataguy/TyrFramework/blob/main/COMMUNITY.md" target="_blank" rel="noopener">COMMUNITY.md</a>
-        so others can discover it.
-      </p>
+      <div class="ecosystem reveal">
+        <div>
+          <div class="eyebrow"><span class="rune">ᛏ</span> Rules for forks</div>
+          <h3>What's required to publish or list a fork</h3>
+          <p>
+            Forking, modifying, and publishing your own distribution never requires permission —
+            that's the whole point of the hybrid open community model. Getting it <em>listed</em> on this
+            site, on the other hand, does go through a quick review. These are the rules, taken
+            straight from the submission issue template:
+          </p>
+        </div>
+        <div>
+          <ol class="ecosystem__steps">
+            <li>Your <code>package.json</code>'s <code>name</code> field must use a scope you own (e.g. <code>@yourname/tyr</code>) — never <code>@tyrframework/*</code>, which is reserved for the official distribution.</li>
+            <li>The package must actually be published on npm and installable right now, not a work in progress.</li>
+            <li>Your repository needs at least a minimal README explaining what's different from upstream — or stating plainly that it's a plain fork with no changes yet.</li>
+            <li>Listed distributions are community-maintained; they aren't officially supported by the Tyr core team, and the submission issue asks you to confirm you understand that.</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -528,8 +574,8 @@ tyr install</code></pre>
         <h2>Stop pasting scripts. Start composing commands.</h2>
         <p>Install Tyr, scaffold your first command, and get live documentation — in under five minutes.</p>
         <div class="cta__actions">
-          <a class="btn btn--primary" href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener">npm install -g @orxataguy/tyr</a>
-          <a class="btn btn--ghost" href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">Browse the code</a>
+          <a class="btn btn--primary" href="https://www.npmjs.com/package/@tyrframework/cli" target="_blank" rel="noopener">npm i -g @tyrframework/cli</a>
+          <a class="btn btn--ghost" href="https://github.com/TyrFramework/tyr" target="_blank" rel="noopener">Browse the code</a>
         </div>
       </div>
     </div>
@@ -555,10 +601,10 @@ tyr install</code></pre>
         </div>
         <div class="footer__col">
           <h4>Resources</h4>
-          <a href="https://github.com/orxataguy/TyrFramework" target="_blank" rel="noopener">Repository</a>
-          <a href="https://www.npmjs.com/package/@orxataguy/tyr" target="_blank" rel="noopener">npm package</a>
-          <a href="https://github.com/orxataguy/TyrFramework/blob/main/COMMUNITY.md" target="_blank" rel="noopener">Distributions</a>
-          <a href="https://github.com/orxataguy/TyrFramework/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+          <a href="https://github.com/TyrFramework/tyr" target="_blank" rel="noopener">Repository</a>
+          <a href="https://www.npmjs.com/package/@tyrframework/cli" target="_blank" rel="noopener">npm package</a>
+          <a href="https://github.com/TyrFramework/tyr/blob/main/COMMUNITY.md" target="_blank" rel="noopener">Distributions</a>
+          <a href="https://github.com/TyrFramework/tyr/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
         </div>
       </div>
     </div>
